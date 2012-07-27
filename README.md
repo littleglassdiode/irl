@@ -8,4 +8,4 @@ we have...
 Intelligence: The Roguelike
 ===========================
 
-Coming soon to graphical terminals near you.
+Coming soon to color terminals near you.
