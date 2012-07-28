@@ -7,7 +7,7 @@ dest="build"
 files="*.c"
 cc="gcc"
 cflags="-std=c99"
-libs="-lm"
+libs="-lm -lncurses"
 
 function info {
     echo -e "\033[1;32m$1\033[0m"
