@@ -42,7 +42,8 @@ int main(int argc, char **argv)
 #endif
 
     mvprintw(0, 0, "There are cockroaches in your mouth.");
-    mvprintw(HEIGHT-1, 0, "%s: HP %i/%i", "Rae", 8, 12);
+    mvprintw(HEIGHT-1, 0, "%s:  HP %i/%i  Arm: %i  PE: %i/%i  ME: %i/%i",
+             "Rae", 10, 16,  5,  18, 20,  28, 34);
     refresh();
     napms(5000);
 
