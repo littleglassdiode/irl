@@ -89,7 +89,7 @@ case $1 in
     done
 
     cd "$cwd"
-    bash -xc "$cc -o $dest/$prog `ls $dest/*.o` $libs"
+    bash -xc "$cc -o $dest/$prog $dest/*.o $libs"
 
     touch .ldtsh_last
     ;;

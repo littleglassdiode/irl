@@ -20,48 +20,15 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <stdbool.h>
-#include <string.h>
+#ifndef INPUT_H
+#define INPUT_H
 
 #include <curses.h>
-
-#include "input.h"
-
-#define WIDTH 80
-#define HEIGHT 24
+//#include "direction.h"
+//#include "vector.h"
 
 
-int main(int argc, char **argv)
-{
-    bool gameover = false;
-    char c = '\0';
-    /* Initialize curses */
-    initscr();
-    curs_set(0);
-    noecho();
-    keypad(stdscr, TRUE);
-    nodelay(stdscr, FALSE);
-#ifdef DEBUG /* Let ^C cause an interrupt if it's a debug build */
-    cbreak();
-#else /* Otherwise, send it to the program for it to be ignored */
-    raw();
-#endif
+int input(void);
 
-    do {
-        mvprintw(0, 0, "There are cockroaches in your mouth.");
-        mvprintw(HEIGHT-1, 0, "%s:  HP %i/%i  Arm: %i  PE: %i/%i  ME: %i/%i",
-                 "Rae", 10, 16,  5,  18, 20,  28, 34);
-        refresh();
-        c = input();
-        if (c == 'Q') {
-            gameover = true;
-        }
-    } while (!gameover);
 
-    /* Clean up this mess we've gotten ourselves into */
-    erase();
-    refresh();
-    endwin();
-
-    return 0;
-}
+#endif /* INPUT_H */
