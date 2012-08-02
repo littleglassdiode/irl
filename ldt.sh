@@ -19,7 +19,7 @@ function note {
 
 function fatal {
     echo -e "\033[1;31m$1\033[0m"
-    error "Fatal error; aborting"
+    echo -e "\033[1;31mFatal error; aborting\033[0m"
     exit 1
 }
 
@@ -80,7 +80,7 @@ case $1 in
             cd "$cwd"
             # Okay, yeah, this is a dirty hack, but it gets the job done without
             # having to write the same command twice.
-            bash -xc "$cc -o $dest/$filename.o -c $cflags $src/$f"
+            bash -xc "$cc -o $dest/$filename.o -c $cflags $src/$f" || exit $?
             if [ $? -ne 0 ]; then
                 fatal "Build error!"
             fi
