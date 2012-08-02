@@ -26,15 +26,30 @@
 #include <curses.h>
 
 #include "input.h"
+#include "entity.h"
 
 #define WIDTH 80
 #define HEIGHT 24
 
+char *map[] = {
+    "########################",
+    "#.......#..............#",
+    "#.......#...........##.#",
+    "#...................#..#",
+    "#########...........#.##",
+    "#...................#..#",
+    "#.......#...........##.#",
+    "#.......#..............#",
+    "########################"
+};
+
 
 int main(int argc, char **argv)
 {
+    Entity rae = {{1, 1}, true, true, 12, 12, '@'};
     bool gameover = false;
     char c = '\0';
+
     /* Initialize curses */
     initscr();
     curs_set(0);
@@ -50,12 +65,17 @@ int main(int argc, char **argv)
     do {
         mvprintw(0, 0, "There are cockroaches in your mouth.");
         mvprintw(HEIGHT-1, 0, "%s:  HP %i/%i  Arm: %i  PE: %i/%i  ME: %i/%i",
-                 "Rae", 10, 16,  5,  18, 20,  28, 34);
+                 "Rae", rae.hp, rae.max_hp,  5,  18, 20,  28, 34);
+        for (int i = 0; i < 9; i++) {
+            mvprintw(i+1, 0, map[i]);
+        }
+        mvaddch(rae.v.y+1, rae.v.x, rae.c);
         refresh();
         c = input();
         if (c == 'Q') {
             gameover = true;
         }
+        ent_move(&rae, c);
     } while (!gameover);
 
     /* Clean up this mess we've gotten ourselves into */

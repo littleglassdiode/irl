@@ -6,7 +6,7 @@ src="src"
 dest="build"
 files="*.c"
 cc="gcc"
-cflags="-std=c99"
+cflags="-Wall -std=c99 -O3"
 libs="-lm -lncurses"
 
 function info {
