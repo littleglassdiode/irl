@@ -49,6 +49,7 @@ int main(int argc, char **argv)
     Entity rae = {{1, 1}, true, true, 12, 12, '@'};
     bool gameover = false;
     char c = '\0';
+    WINDOW *stats = NULL;
 
     /* Initialize curses */
     initscr();
@@ -62,15 +63,35 @@ int main(int argc, char **argv)
     raw();
 #endif
 
+    stats = newwin(24, 10, 0, 0);
+
     do {
-        mvprintw(0, 0, "There are cockroaches in your mouth.");
-        mvprintw(HEIGHT-1, 0, "%s:  HP %i/%i  Arm: %i  PE: %i/%i  ME: %i/%i",
-                 "Rae", rae.hp, rae.max_hp,  5,  18, 20,  28, 34);
-        for (int i = 0; i < 9; i++) {
-            mvprintw(i+1, 0, map[i]);
+        for (int i = 0; i < 24; i++) {
+            mvwaddch(stats, i, 9, ACS_VLINE);
         }
-        mvaddch(rae.v.y+1, rae.v.x, rae.c);
+        mvwaddch(stats, 1, 9, ACS_RTEE);
+        for (int i = 0; i < 9; i++) {
+            mvwaddch(stats, 1, i, ACS_HLINE);
+        }
+        wattron(stats, A_BOLD);
+        mvwprintw(stats, 0, 0, "Rae");
+        wattroff(stats, A_BOLD);
+        mvwprintw(stats, 2, 0, "Health");
+        mvwprintw(stats, 3, 0, "%i/%i", rae.hp, rae.max_hp);
+        mvwprintw(stats, 5, 0, "Armor");
+        mvwprintw(stats, 6, 0, "%i", 5);
+        mvwprintw(stats, 8, 0, "Physic.En");
+        mvwprintw(stats, 9, 0, "%i/%i", 18, 20);
+        mvwprintw(stats, 11, 0, "Mental.En");
+        mvwprintw(stats, 12, 0, "%i/%i", 28, 34);
+        for (int i = 0; i < 9; i++) {
+            mvprintw(i, 10, map[i]);
+        }
+        attron(A_BOLD);
+        mvaddch(rae.v.y, rae.v.x+10, rae.c);
+        attroff(A_BOLD);
         refresh();
+        wrefresh(stats);
         c = input();
         if (c == 'Q') {
             gameover = true;
@@ -79,6 +100,8 @@ int main(int argc, char **argv)
     } while (!gameover);
 
     /* Clean up this mess we've gotten ourselves into */
+    delwin(stats);
+    stats = NULL;
     erase();
     refresh();
     endwin();
