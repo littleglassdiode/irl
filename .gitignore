@@ -1,3 +1,5 @@
 .ldtsh_last
 build/
+.ldtwinsh_last
+buildwin/
 .*.swp

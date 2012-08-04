@@ -20,7 +20,6 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <stdbool.h>
 #include <string.h>
 
 #include <curses.h>
@@ -30,6 +29,7 @@
 
 #define WIDTH 80
 #define HEIGHT 24
+
 
 char *map[] = {
     "########################",
