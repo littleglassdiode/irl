@@ -50,6 +50,7 @@ int main(int argc, char **argv)
     bool gameover = false;
     char c = '\0';
     WINDOW *stats = NULL;
+    WINDOW *field = NULL;
 
     /* Initialize curses */
     initscr();
@@ -64,44 +65,46 @@ int main(int argc, char **argv)
 #endif
 
     stats = newwin(24, 10, 0, 0);
+    field = newwin(24, 70, 0, 10);
 
     do {
-        for (int i = 0; i < 24; i++) {
+        for (int i = 0; i < 24; i++)
             mvwaddch(stats, i, 9, ACS_VLINE);
-        }
-        mvwaddch(stats, 1, 9, ACS_RTEE);
-        for (int i = 0; i < 9; i++) {
-            mvwaddch(stats, 1, i, ACS_HLINE);
-        }
+        mvwaddch(stats, 2, 9, ACS_RTEE);
+        for (int i = 0; i < 9; i++)
+            mvwaddch(stats, 2, i, ACS_HLINE);
         wattron(stats, A_BOLD);
         mvwprintw(stats, 0, 0, "Rae");
         wattroff(stats, A_BOLD);
-        mvwprintw(stats, 2, 0, "Health");
-        mvwprintw(stats, 3, 0, "%i/%i", rae.hp, rae.max_hp);
-        mvwprintw(stats, 5, 0, "Armor");
-        mvwprintw(stats, 6, 0, "%i", 5);
-        mvwprintw(stats, 8, 0, "Physic.En");
-        mvwprintw(stats, 9, 0, "%i/%i", 18, 20);
-        mvwprintw(stats, 11, 0, "Mental.En");
-        mvwprintw(stats, 12, 0, "%i/%i", 28, 34);
+        mvwprintw(stats, 1, 0, "Level %-3i", 3);
+        mvwprintw(stats, 3, 0, "Health");
+        mvwprintw(stats, 4, 0, "%i/%i", rae.hp, rae.max_hp);
+        mvwprintw(stats, 6, 0, "Armor");
+        mvwprintw(stats, 7, 0, "%i", 5);
+        mvwprintw(stats, 9, 0, "Physic.En");
+        mvwprintw(stats, 10, 0, "%i/%i", 18, 20);
+        mvwprintw(stats, 12, 0, "Mental.En");
+        mvwprintw(stats, 13, 0, "%i/%i", 34, 34);
         for (int i = 0; i < 9; i++) {
-            mvprintw(i, 10, map[i]);
+            mvwprintw(field, i, 0, map[i]);
         }
-        attron(A_BOLD);
-        mvaddch(rae.v.y, rae.v.x+10, rae.c);
-        attroff(A_BOLD);
+        wattron(field, A_BOLD);
+        mvwaddch(field, rae.v.y, rae.v.x, rae.c);
+        wattroff(field, A_BOLD);
         refresh();
         wrefresh(stats);
+        wrefresh(field);
         c = input();
-        if (c == 'Q') {
+        if (c == 'Q')
             gameover = true;
-        }
         ent_move(&rae, c);
     } while (!gameover);
 
     /* Clean up this mess we've gotten ourselves into */
     delwin(stats);
     stats = NULL;
+    delwin(field);
+    field = NULL;
     erase();
     refresh();
     endwin();
