@@ -27,6 +27,7 @@
 #include "input.h"
 #include "entity.h"
 
+#define STATSWIDTH 10
 #define WIDTH 80
 #define HEIGHT 24
 
@@ -64,15 +65,10 @@ int main(int argc, char **argv)
     raw();
 #endif
 
-    stats = newwin(24, 10, 0, 0);
-    field = newwin(24, 70, 0, 10);
+    stats = newwin(HEIGHT, STATSWIDTH, 0, 0);
+    field = newwin(HEIGHT, WIDTH-STATSWIDTH, 0, 10);
 
     do {
-        for (int i = 0; i < 24; i++)
-            mvwaddch(stats, i, 9, ACS_VLINE);
-        mvwaddch(stats, 2, 9, ACS_RTEE);
-        for (int i = 0; i < 9; i++)
-            mvwaddch(stats, 2, i, ACS_HLINE);
         wattron(stats, A_BOLD);
         mvwprintw(stats, 0, 0, "Rae");
         wattroff(stats, A_BOLD);
@@ -85,6 +81,12 @@ int main(int argc, char **argv)
         mvwprintw(stats, 10, 0, "%i/%i", 18, 20);
         mvwprintw(stats, 12, 0, "Mental.En");
         mvwprintw(stats, 13, 0, "%i/%i", 34, 34);
+        for (int i = 0; i < HEIGHT-1; i++)
+            mvwaddch(stats, i, STATSWIDTH-1, ACS_VLINE);
+        mvwaddch(stats, 2, 9, ACS_RTEE);
+        for (int i = 0; i < STATSWIDTH-1; i++)
+            mvwaddch(stats, 2, i, ACS_HLINE);
+
         for (int i = 0; i < 9; i++) {
             mvwprintw(field, i, 0, map[i]);
         }
