@@ -74,6 +74,7 @@ int main(int argc, char **argv)
     char c = '\0';
     WINDOW *stats = NULL;
     WINDOW *field = NULL;
+    int starty = 0;
 
     /* Initialize curses */
     initscr();
@@ -109,11 +110,17 @@ int main(int argc, char **argv)
         for (int i = 0; i < STATSWIDTH-1; i++)
             mvwaddch(stats, 2, i, ACS_HLINE);
 
-        for (int i = 0; i < mapheight; i++) {
-            mvwprintw(field, i, 0, map[i]);
+        if (rae.v.y < (starty + 8) && starty > 0) {
+            starty--;
+        }
+        if (rae.v.y > (starty + HEIGHT - 8) && starty + HEIGHT < mapheight) {
+            starty++;
+        }
+        for (int i = starty; i < starty + HEIGHT; i++) {
+            mvwprintw(field, i-starty, 0, map[i]);
         }
         wattron(field, A_BOLD);
-        mvwaddch(field, rae.v.y, rae.v.x, rae.c);
+        mvwaddch(field, rae.v.y-starty, rae.v.x, rae.c);
         wattroff(field, A_BOLD);
         refresh();
         wrefresh(stats);
