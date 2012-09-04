@@ -69,7 +69,7 @@ char *map[] = {
 
 int main(int argc, char **argv)
 {
-    Entity rae = {{11, 1}, true, true, 12, 12, '@'};
+    struct entity rae = {NULL, {11, 1}, true, true, 12, 12, '@'};
     bool gameover = false;
     char c = '\0';
     WINDOW *stats = NULL;

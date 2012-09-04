@@ -24,16 +24,13 @@
 #define VECTOR_H
 
 
-typedef struct {
+struct vector {
     unsigned int y;
     unsigned int x;
-} Vector;
+};
 
-Vector vec_add(const Vector, const Vector);
-Vector dir_to_vec(int dir);
+struct vector vec_add(const struct vector *, const struct vector *);
+struct vector dir_to_vec(int dir);
 
 
 #endif /* VECTOR_H */
-
-/* ex: syntax=c shiftwidth=4 expandtab
- */

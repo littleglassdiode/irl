@@ -20,49 +20,10 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "input.h"
+#ifndef AI_H
+#define AI_H
+
+#include <curses.h>
 
 
-int input(void)
-{
-    int c = getch();
-
-    switch (c) {
-        case '4':
-        case KEY_LEFT:
-        case 'h':
-            return 'h';
-        case '2':
-        case KEY_DOWN:
-        case 'j':
-            return 'j';
-        case '8':
-        case KEY_UP:
-        case 'k':
-            return 'k';
-        case '6':
-        case KEY_RIGHT:
-        case 'l':
-            return 'l';
-        case '7':
-        case KEY_HOME:
-        case 'y':
-            return 'y';
-        case '9':
-        case KEY_PPAGE:
-        case 'u':
-            return 'u';
-        case '1':
-        case KEY_END:
-        case 'b':
-            return 'b';
-        case '3':
-        case KEY_NPAGE:
-        case 'n':
-            return 'n';
-        case 'Q':
-            return 'Q';
-        default:
-            return c;
-    }
-}
+#endif /* AI_H */

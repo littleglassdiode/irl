@@ -23,17 +23,17 @@
 #include "vector.h"
 
 
-Vector vec_add(const Vector v1, const Vector v2)
+struct vector vec_add(const struct vector *v1, const struct vector *v2)
 {
-    Vector result;
-    result.x = v1.x + v2.x;
-    result.y = v1.y + v2.y;
+    struct vector result;
+    result.x = v1->x + v2->x;
+    result.y = v1->y + v2->y;
     return result;
 }
 
-Vector dir_to_vec(int dir)
+struct vector dir_to_vec(int dir)
 {
-    Vector v = {0, 0};
+    struct vector v = {0, 0};
 
     switch (dir) {
         case 'h':
@@ -72,7 +72,3 @@ Vector dir_to_vec(int dir)
 
     return v;
 }
-
-
-/* ex: syntax=c shiftwidth=4 expandtab
- */
