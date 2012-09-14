@@ -20,16 +20,22 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "entity.h"
+#ifndef ACTOR_H
+#define ACTOR_H
 
-extern char *map[];
+#include <stdbool.h>
+#include "vector.h"
 
 
-void ent_move(struct entity *ent, const int dir)
-{
-    struct vector dirv = dir_to_vec(dir);
-    struct vector v = vec_add(&dirv, &ent->v);
-    if (map[v.y][v.x] == '.') {
-        ent->v = v;
-    }
-}
+struct actor {
+    void (*ai)(struct actor);
+    struct vector v;
+    short max_hp;
+    short hp;
+    const char c;
+};
+
+void act_move(struct actor *, const int);
+
+
+#endif /* ACTOR_H */

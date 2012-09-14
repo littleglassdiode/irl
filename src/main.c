@@ -25,7 +25,7 @@
 #include <curses.h>
 
 #include "input.h"
-#include "entity.h"
+#include "actor.h"
 
 #define STATSWIDTH 10
 #define FIELDWIDTH 70
@@ -69,7 +69,7 @@ char *map[] = {
 
 int main(int argc, char **argv)
 {
-    struct entity rae = {NULL, {11, 1}, true, true, 12, 12, '@'};
+    struct actor rae = {NULL, {11, 1}, 12, 12, '@'};
     bool gameover = false;
     char c = '\0';
     WINDOW *stats = NULL;
@@ -81,6 +81,7 @@ int main(int argc, char **argv)
     initscr();
     curs_set(0);
     noecho();
+    nonl();
     keypad(stdscr, TRUE);
     nodelay(stdscr, FALSE);
 #ifdef DEBUG /* Let ^C cause an interrupt if it's a debug build */
@@ -111,14 +112,14 @@ int main(int argc, char **argv)
         for (int i = 0; i < STATSWIDTH-1; i++)
             mvwaddch(stats, 2, i, ACS_HLINE);
 
-        if (rae.v.x < (startx + 16) && startx > 0) {
+        if (rae.v.x < (startx + 15) && startx > 0) {
             startx--;
         }
         if (rae.v.x > (startx + FIELDWIDTH - 16) && startx + FIELDWIDTH <
                 mapwidth) {
             startx++;
         }
-        if (rae.v.y < (starty + 8) && starty > 0) {
+        if (rae.v.y < (starty + 7) && starty > 0) {
             starty--;
         }
         if (rae.v.y > (starty + HEIGHT - 8) && starty + HEIGHT < mapheight) {
