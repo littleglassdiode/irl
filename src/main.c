@@ -137,7 +137,7 @@ int main(int argc, char **argv)
         c = input();
         if (c == 'Q')
             gameover = true;
-        ent_move(&rae, c);
+        act_move(&rae, c);
     } while (!gameover);
 
     /* Clean up this mess we've gotten ourselves into */
