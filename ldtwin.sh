@@ -9,6 +9,9 @@ cc="i486-mingw32-gcc"
 cflags="-Wall -std=c99 -O3"
 libs="-lm -lpdcurses"
 
+ldt="build"
+ldtlast=".ldtwinsh_last"
+
 function info {
     echo -e "\033[1;32m$1\033[0m"
 }
@@ -26,7 +29,11 @@ function fatal {
 # That's a tab character between those quotes.
 export PS4="	"
 
-case $1 in
+if [ ! $1 == '' ]; then
+    ldt=$1
+fi
+
+case $ldt in
   help)
     echo -e "\033[1mL\033[0met's \033[1md\033[0mo" \
         "\033[1mt\033[0mhis\033[1;30m.\033[37ms\033[0mtuff" \
@@ -42,8 +49,8 @@ case $1 in
     if [ -d "$dest" ]; then
         bash -xc "rm -r \"$dest\""
     fi
-    if [ -f ".ldtwinsh_last" ]; then
-        bash -xc "rm .ldtwinsh_last"
+    if [ -f "$ldtlast" ]; then
+        bash -xc "rm $ldtlast"
     fi
     ;;
   build | *)
@@ -60,9 +67,9 @@ case $1 in
 
     cwd=$PWD
 
-    last="$cwd/.ldtwinsh_last"
+    last="$cwd/$ldtlast"
     cf="last"
-    if [ ! -f ".ldtwinsh_last" ]; then
+    if [ ! -f "$ldtlast" ]; then
         cf="f"
     fi
 
@@ -91,6 +98,6 @@ case $1 in
     cd "$cwd"
     bash -xc "$cc -o $dest/$prog $dest/*.o $libs"
 
-    touch .ldtwinsh_last
+    touch $ldtlast
     ;;
 esac
