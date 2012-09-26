@@ -7,10 +7,10 @@ dest="build"
 files="*.c"
 cc="gcc"
 cflags="-Wall -std=c99 -O3"
-libs="-lm -lncurses"
+# Only the libs that apply to all platforms here
+libs="-lm"
 
 ldt="build"
-ldtlast=".ldtsh_last"
 
 function info {
     echo -e "\033[1;32m$1\033[0m"
@@ -32,6 +32,19 @@ export PS4="	"
 if [ ! $1 == '' ]; then
     ldt=$1
 fi
+
+case $sys in
+  lin|'')
+    libs="$libs -lncurses"
+    ldtlast=".ldtsh_last"
+    ;;
+  win)
+    prog="$prog.exe"
+    dest="${dest}win"
+    cc="i486-mingw32-gcc"
+    libs="$libs -lpdcurses"
+    ldtlast=".ldtsh_win_last"
+esac
 
 case $ldt in
   help)
