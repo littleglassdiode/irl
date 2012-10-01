@@ -31,6 +31,7 @@
 #define FIELDWIDTH 70
 #define WIDTH (STATSWIDTH + FIELDWIDTH)
 #define HEIGHT 24
+#define ACTOR_MAX 128 /* probably won't take too much memory */
 
 
 int mapheight = 29, mapwidth = 79;
@@ -112,24 +113,24 @@ int main(int argc, char **argv)
         for (int i = 0; i < STATSWIDTH-1; i++)
             mvwaddch(stats, 2, i, ACS_HLINE);
 
-        if (rae.v.x < (startx + 15) && startx > 0) {
+        if (rae.pos.x < (startx + 15) && startx > 0) {
             startx--;
         }
-        if (rae.v.x > (startx + FIELDWIDTH - 16) && startx + FIELDWIDTH <
+        if (rae.pos.x > (startx + FIELDWIDTH - 16) && startx + FIELDWIDTH <
                 mapwidth) {
             startx++;
         }
-        if (rae.v.y < (starty + 7) && starty > 0) {
+        if (rae.pos.y < (starty + 7) && starty > 0) {
             starty--;
         }
-        if (rae.v.y > (starty + HEIGHT - 8) && starty + HEIGHT < mapheight) {
+        if (rae.pos.y > (starty + HEIGHT - 8) && starty + HEIGHT < mapheight) {
             starty++;
         }
         for (int i = starty; i < starty + HEIGHT; i++) {
             mvwprintw(field, i-starty, 0, map[i]+startx);
         }
         wattron(field, A_BOLD);
-        mvwaddch(field, rae.v.y-starty, rae.v.x-startx, rae.c);
+        mvwaddch(field, rae.pos.y-starty, rae.pos.x-startx, rae.c);
         wattroff(field, A_BOLD);
         refresh();
         wrefresh(stats);

@@ -20,17 +20,17 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef VECTOR_H
-#define VECTOR_H
+#ifndef LEVEL_H
+#define LEVEL_H
+
+#include <vector.h>
 
 
-struct vector {
-    int y;
-    int x;
-};
-
-struct vector vec_add(const struct vector *, const struct vector *);
-struct vector dir_to_vec(int dir);
+struct level {
+    struct vector map_size;
+    char **map;
+    struct actor *actors[ACTOR_MAX];
+}
 
 
-#endif /* VECTOR_H */
+#endif /* LEVEL_H */

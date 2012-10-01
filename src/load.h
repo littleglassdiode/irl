@@ -20,17 +20,13 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef VECTOR_H
-#define VECTOR_H
+#ifndef LOAD_H
+#define LOAD_H
+
+#include <stdio.h>
 
 
-struct vector {
-    int y;
-    int x;
-};
-
-struct vector vec_add(const struct vector *, const struct vector *);
-struct vector dir_to_vec(int dir);
+struct level *loadlevel(char *filename);
 
 
-#endif /* VECTOR_H */
+#endif /* LOAD_H */

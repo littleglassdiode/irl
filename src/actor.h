@@ -29,7 +29,7 @@
 
 struct actor {
     void (*ai)(struct actor);
-    struct vector v;
+    struct vector pos;
     short max_hp;
     short hp;
     const char c;

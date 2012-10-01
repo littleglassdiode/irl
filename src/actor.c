@@ -28,8 +28,8 @@ extern char *map[];
 void act_move(struct actor *act, const int dir)
 {
     struct vector dirv = dir_to_vec(dir);
-    struct vector v = vec_add(&dirv, &act->v);
-    if (map[v.y][v.x] == '.') {
-        act->v = v;
+    struct vector pos = vec_add(&dirv, &act->pos);
+    if (map[pos.y][pos.x] == '.') {
+        act->pos = pos;
     }
 }
