@@ -9,3 +9,22 @@ Intelligence: The Roguelike
 ===========================
 
 Coming soon to color terminals near you.
+
+Compiling
+=========
+
+To build the game, run
+
+    $ ./ldt.sh
+
+To clean what you've built, run
+
+    $ ./ldt.sh clean
+
+To build the game for Windows (cross-compile from Linux), run
+
+    $ sys=win ./ldt.sh
+
+To clean the Windows build, run
+
+    $ sys=win ./ldt.sh clean
