@@ -20,19 +20,27 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef AI_H
-#define AI_H
+#ifndef MAIN_H
+#define MAIN_H
+
+#include <string.h>
 
 #include <curses.h>
 
 #include "actor.h"
+#include "ai.h"
 #include "input.h"
-#include "main.h"
+
+#define STATSWIDTH 10
+#define FIELDWIDTH 70
+#define WIDTH (STATSWIDTH + FIELDWIDTH)
+#define HEIGHT 24
+#define ACTOR_MAX 128 /* probably won't take too much memory */
 
 
-extern void (*ai_list[])(struct actor *);
+extern int mapheight, mapwidth;
+extern char *map[];
+extern bool gameover;
 
-void ai_key_input(struct actor *);
 
-
-#endif /* AI_H */
+#endif /* MAIN_H */

@@ -28,7 +28,7 @@
 
 
 struct actor {
-    void (*ai)(struct actor);
+    unsigned int ai; /* Index of ai_list element */
     struct vector pos;
     short max_hp;
     short hp;

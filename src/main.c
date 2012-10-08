@@ -20,18 +20,7 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <string.h>
-
-#include <curses.h>
-
-#include "input.h"
-#include "actor.h"
-
-#define STATSWIDTH 10
-#define FIELDWIDTH 70
-#define WIDTH (STATSWIDTH + FIELDWIDTH)
-#define HEIGHT 24
-#define ACTOR_MAX 128 /* probably won't take too much memory */
+#include "main.h"
 
 
 int mapheight = 29, mapwidth = 79;
@@ -67,12 +56,11 @@ char *map[] = {
     "                         ###                                                   "
 };
 
+bool gameover = false;
 
 int main(int argc, char **argv)
 {
-    struct actor rae = {NULL, {11, 1}, 12, 12, '@'};
-    bool gameover = false;
-    char c = '\0';
+    struct actor rae = {1, {11, 1}, 12, 12, '@'};
     WINDOW *stats = NULL;
     WINDOW *field = NULL;
     int starty = 0;
@@ -135,10 +123,7 @@ int main(int argc, char **argv)
         refresh();
         wrefresh(stats);
         wrefresh(field);
-        c = input();
-        if (c == 'Q')
-            gameover = true;
-        act_move(&rae, c);
+        ai_list[rae.ai](&rae);
     } while (!gameover);
 
     /* Clean up this mess we've gotten ourselves into */

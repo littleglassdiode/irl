@@ -20,19 +20,19 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef AI_H
-#define AI_H
-
-#include <curses.h>
-
-#include "actor.h"
-#include "input.h"
-#include "main.h"
+#include "ai.h"
 
 
-extern void (*ai_list[])(struct actor *);
+void (*ai_list[])(struct actor *) = {
+    NULL,
+    &ai_key_input
+};
 
-void ai_key_input(struct actor *);
 
-
-#endif /* AI_H */
+void ai_key_input(struct actor *a)
+{
+    char c = input();
+    if (c == 'Q')
+        gameover = true;
+    act_move(a, c);
+}
