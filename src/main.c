@@ -87,14 +87,10 @@ int main(int argc, char **argv)
         mvwprintw(stats, 0, 0, "Rae");
         wattroff(stats, A_BOLD);
         mvwprintw(stats, 1, 0, "Level %-3i", 3);
-        mvwprintw(stats, 3, 0, "Health");
-        mvwprintw(stats, 4, 0, "%i/%i", rae.hp, rae.max_hp);
-        mvwprintw(stats, 6, 0, "Armor");
-        mvwprintw(stats, 7, 0, "%i", 5);
-        mvwprintw(stats, 9, 0, "Physic.En");
-        mvwprintw(stats, 10, 0, "%i/%i", 18, 20);
-        mvwprintw(stats, 12, 0, "Mental.En");
-        mvwprintw(stats, 13, 0, "%i/%i", 34, 34);
+        mvwprintw(stats, 3, 0, "Health\n%i/%i", rae.hp, rae.max_hp);
+        mvwprintw(stats, 6, 0, "Armor %i", 5);
+        mvwprintw(stats, 8, 0, "Physic.En\n%i/%i", 18, 20);
+        mvwprintw(stats, 11, 0, "Mental.En\n%i/%i", 34, 34);
         for (int i = 0; i < HEIGHT; i++)
             mvwaddch(stats, i, STATSWIDTH-1, ACS_VLINE);
         mvwaddch(stats, 2, 9, ACS_RTEE);

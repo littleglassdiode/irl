@@ -24,8 +24,6 @@
 #define INPUT_H
 
 #include <curses.h>
-//#include "direction.h"
-//#include "vector.h"
 
 
 int input(void);
