@@ -20,19 +20,53 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "ai.h"
+#include "level.h"
 
 
-void (*ai_list[])(struct level *, struct actor *) = {
-    NULL,
-    &ai_key_input
-};
-
-
-void ai_key_input(struct level *l, struct actor *a)
+struct level *alloc_level(int y, int x)
 {
-    char c = input();
-    if (c == 'Q')
-        gameover = true;
-    act_move(l, a, c);
+    struct level *level = calloc(1, sizeof (level));
+
+    if (level == NULL) {
+        free_level(level);
+        return NULL;
+    }
+
+    level->size.y = y;
+    level->size.x = x;
+    level->map = calloc(y, sizeof (char *));
+    if (level->map == NULL) {
+        free_level(level);
+        return NULL;
+    }
+    for (y--; y >= 0; y--) {
+        level->map[y] = calloc(x + 1, sizeof (char));
+        if (level->map[y] == NULL) {
+            free_level(level);
+            return NULL;
+        }
+    }
+    level->actors = calloc(ACTOR_MAX, sizeof (struct actor));
+    if (level->actors == NULL) {
+        free_level(level);
+        return NULL;
+    }
+
+    return level;
+}
+
+void free_level(struct level *level)
+{
+    free(level->actors);
+    level->actors = NULL;
+
+    for (int y = 0; y < level->size.y; y++) {
+        free(level->map[y]);
+        level->map[y] = NULL;
+    }
+
+    free(level->map);
+    level->map = NULL;
+
+    free(level);
 }

@@ -25,6 +25,9 @@
 
 #include <stdio.h>
 
+#define LOAD_MAXCMD 12
+#define LOAD_MAXLINE 128
+
 
 struct level *loadlevel(char *filename);
 

@@ -23,14 +23,20 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
-#include <vector.h>
+#include <stdlib.h>
+
+#include "actor.h"
+#include "vector.h"
 
 
 struct level {
-    struct vector map_size;
+    struct vector size;
     char **map;
-    struct actor *actors[ACTOR_MAX];
-}
+    struct actor *actors;
+};
+
+struct level *alloc_level(int y, int x);
+void free_level(struct level *level);
 
 
 #endif /* LEVEL_H */

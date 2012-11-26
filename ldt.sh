@@ -6,7 +6,7 @@ src="src"
 dest="build"
 files="*.c"
 cc="gcc"
-cflags="-Wall -std=c99 -O3"
+cflags="-Wall -std=c99 -g"
 # Only the libs that apply to all platforms here
 libs="-lm"
 
@@ -100,7 +100,7 @@ case $ldt in
             cd "$cwd"
             # Okay, yeah, this is a dirty hack, but it gets the job done without
             # having to write the same command twice.
-            bash -xc "$cc -o $dest/$filename.o -c $cflags $src/$f" || exit $?
+            bash -xc "$cc -o $dest/$filename.o -c $cflags $src/$f"
             if [ $? -ne 0 ]; then
                 fatal "Build error!"
             fi

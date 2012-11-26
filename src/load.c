@@ -20,19 +20,21 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "ai.h"
+#include "load.h"
 
 
-void (*ai_list[])(struct level *, struct actor *) = {
-    NULL,
-    &ai_key_input
-};
-
-
-void ai_key_input(struct level *l, struct actor *a)
+struct level *loadlevel(char *filename)
 {
-    char c = input();
-    if (c == 'Q')
-        gameover = true;
-    act_move(l, a, c);
+    char line[LOAD_MAXLINE];
+    char cmd[LOAD_MAXCMD];
+    FILE *f = fopen(filename, "r");
+    struct level *lvl = NULL;
+
+    /* If the file didn't load, let's bail out right now */
+    if (f == NULL)
+        return NULL;
+
+    fgets(line, LOAD_MAXLINE, f);
+
+    return lvl;
 }

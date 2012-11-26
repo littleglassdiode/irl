@@ -23,19 +23,21 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include <curses.h>
-
-#include "actor.h"
-#include "ai.h"
-#include "input.h"
 
 #define STATSWIDTH 10
 #define FIELDWIDTH 70
 #define WIDTH (STATSWIDTH + FIELDWIDTH)
 #define HEIGHT 24
-#define ACTOR_MAX 128 /* probably won't take too much memory */
+
+#include "actor.h"
+#include "ai.h"
+#include "input.h"
+#include "level.h"
 
 
 extern int mapheight, mapwidth;

@@ -22,14 +22,12 @@
 
 #include "actor.h"
 
-extern char *map[];
 
-
-void act_move(struct actor *act, const int dir)
+void act_move(struct level *lvl, struct actor *act, const int dir)
 {
     struct vector dirv = dir_to_vec(dir);
     struct vector pos = vec_add(&dirv, &act->pos);
-    if (map[pos.y][pos.x] == '.') {
+    if (lvl->map[pos.y][pos.x] == '.') {
         act->pos = pos;
     }
 }

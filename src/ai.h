@@ -27,12 +27,13 @@
 
 #include "actor.h"
 #include "input.h"
+#include "level.h"
 #include "main.h"
 
 
-extern void (*ai_list[])(struct actor *);
+extern void (*ai_list[])(struct level *, struct actor *);
 
-void ai_key_input(struct actor *);
+void ai_key_input(struct level *, struct actor *);
 
 
 #endif /* AI_H */

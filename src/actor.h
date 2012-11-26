@@ -24,6 +24,10 @@
 #define ACTOR_H
 
 #include <stdbool.h>
+
+#define ACTOR_MAX 128 /* probably won't take too much memory */
+
+#include "level.h"
 #include "vector.h"
 
 
@@ -35,7 +39,7 @@ struct actor {
     const char c;
 };
 
-void act_move(struct actor *, const int);
+void act_move(struct level *, struct actor *, const int);
 
 
 #endif /* ACTOR_H */
