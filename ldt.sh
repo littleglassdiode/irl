@@ -6,8 +6,8 @@ src="src"
 dest="build"
 files="*.c"
 cc="gcc"
-cflags="-Wall -std=c99 -g"
-# Only the libs that apply to all platforms here
+# Only the flags that apply to all settings here
+cflags="-Wall -std=c99"
 libs="-lm"
 
 ldt="build"
@@ -39,11 +39,20 @@ case $sys in
     ldtlast=".ldtsh_last"
     ;;
   win)
-    prog="$prog.exe"
+    prog="${prog}.exe"
     dest="${dest}win"
     cc="i486-mingw32-gcc"
     libs="$libs -lpdcurses"
     ldtlast=".ldtsh_win_last"
+esac
+
+case $build in
+  debug|'')
+    cflags="$cflags -g"
+    ;;
+  rel)
+    cflags="$cflags -O3"
+    ;;
 esac
 
 case $ldt in
