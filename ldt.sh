@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # ldt.sh
 
 prog="irl"
@@ -12,24 +12,26 @@ libs="-lm"
 
 ldt="build"
 
-function info {
-    echo -e "\033[1;32m$1\033[0m"
+info() {
+    printf "\033[1;32m$1\033[0m\n"
 }
 
-function note {
-    echo -e "\033[36m$1\033[0m"
+note() {
+    printf "\033[36m$1\033[0m\n"
 }
 
-function fatal {
-    echo -e "\033[1;31m$1\033[0m"
-    echo -e "\033[1;31mFatal error; aborting\033[0m"
+fatal() {
+    printf "\033[1;31m$1\033[0m\n"
+    printf "\033[1;31mFatal error; aborting\033[0m\n"
     exit 1
 }
 
-# That's a tab character between those quotes.
-export PS4="	"
+pexec() {
+    printf "\t$*\n"
+    $*
+}
 
-if [ ! $1 == '' ]; then
+if [ ! $1 = '' ]; then
     ldt=$1
 fi
 
@@ -57,22 +59,22 @@ esac
 
 case $ldt in
   help)
-    echo -e "\033[1mL\033[0met's \033[1md\033[0mo" \
-        "\033[1mt\033[0mhis\033[1;30m.\033[37ms\033[0mtuff" \
-        "\033[1mh\033[0mere!"
-    echo "usage: ldt.sh [subcommand]"
-    echo "where subcommand is one of:"
-    echo "  build (default): compile the project"
-    echo "  clean: remove anything ldt.sh created"
-    echo "  help: show this message"
+    printf "\033[1mL\033[0met's \033[1md\033[0mo "
+    printf "\033[1mt\033[0mhis\033[1;30m.\033[37ms\033[0mtuff "
+    printf "\033[1mh\033[0mere!\n"
+    printf "usage: ldt.sh [subcommand]\n"
+    printf "where subcommand is one of:\n"
+    printf "  build (default): compile the project\n"
+    printf "  clean: remove anything ldt.sh created\n"
+    printf "  help: show this message\n"
     ;;
   clean)
     info "Let's clean this stuff here!"
     if [ -d "$dest" ]; then
-        bash -xc "rm -r \"$dest\""
+        pexec rm -r "$dest"
     fi
     if [ -f "$ldtlast" ]; then
-        bash -xc "rm $ldtlast"
+        pexec rm "$ldtlast"
     fi
     ;;
   build)
@@ -109,7 +111,7 @@ case $ldt in
             cd "$cwd"
             # Okay, yeah, this is a dirty hack, but it gets the job done without
             # having to write the same command twice.
-            bash -xc "$cc -o $dest/$filename.o -c $cflags $src/$f"
+            pexec $cc -o $dest/$filename.o -c $cflags $src/$f
             if [ $? -ne 0 ]; then
                 fatal "Build error!"
             fi
@@ -118,7 +120,7 @@ case $ldt in
     done
 
     cd "$cwd"
-    bash -xc "$cc -o $dest/$prog $dest/*.o $libs"
+    pexec $cc -o $dest/$prog $dest/*.o $libs
 
     touch $ldtlast
     ;;
