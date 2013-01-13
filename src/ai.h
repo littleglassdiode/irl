@@ -23,7 +23,12 @@
 #ifndef AI_H
 #define AI_H
 
-#include <curses.h>
+#if (defined __CYGWIN__)
+      #include "ncurses/curses.h"
+#else
+        #include <curses.h>
+#endif
+
 
 #include "actor.h"
 #include "input.h"
