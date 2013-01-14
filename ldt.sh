@@ -98,7 +98,7 @@ case $ldt in
     fi
 
     f="$src"
-    if [ "$src" -ot `eval echo \\$$cf` ]; then
+    if [ "$src" -ot $(eval echo \\$$cf) ]; then
         note "No change since last build."
         exit 0
     fi
@@ -106,7 +106,7 @@ case $ldt in
     cd "$src"
     for f in $files; do
         # if it's a regular file that has been changed since last build
-        if [ -f "$f" -a ! `eval echo \\$$cf` -nt "$f" ]; then
+        if [ -f "$f" -a ! $(eval echo \\$$cf) -nt "$f" ]; then
             filename="${f%.*}"
             cd "$cwd"
             # Okay, yeah, this is a dirty hack, but it gets the job done without
