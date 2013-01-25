@@ -32,6 +32,6 @@ To clean the Windows build, run
 Running
 =======
 
-After successfully compiling, just run the compiled executable:
+After successfully compiling, just run the compiled binary:
 
     $ build/raelives
