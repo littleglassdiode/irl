@@ -23,7 +23,12 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-#include <curses.h>
+#if (defined __CYGWIN__)
+      #include "ncurses/curses.h"
+#else
+        #include <curses.h>
+#endif
+
 
 
 int input(void);

@@ -27,7 +27,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <curses.h>
+#if (defined __CYGWIN__)
+      #include "ncurses/curses.h"
+#else
+        #include <curses.h>
+#endif
+
 
 #define STATSWIDTH 10
 #define FIELDWIDTH 70
