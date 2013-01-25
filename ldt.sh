@@ -1,7 +1,7 @@
 #!/bin/sh
 # ldt.sh
 
-prog="irl"
+prog="raelives"
 src="src"
 dest="build"
 files="*.c"
