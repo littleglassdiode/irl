@@ -23,10 +23,10 @@
 #ifndef AI_H
 #define AI_H
 
-#if (defined __CYGWIN__)
-      #include "ncurses/curses.h"
+#ifdef __CYGWIN__
+# include "ncurses/curses.h"
 #else
-        #include <curses.h>
+# include <curses.h>
 #endif
 
 

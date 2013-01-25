@@ -23,10 +23,10 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-#if (defined __CYGWIN__)
-      #include "ncurses/curses.h"
+#ifdef __CYGWIN__
+# include "ncurses/curses.h"
 #else
-        #include <curses.h>
+# include <curses.h>
 #endif
 
 
