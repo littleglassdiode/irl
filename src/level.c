@@ -1,4 +1,4 @@
-/* Copyright (c) 2012-2013 Clayton G. Hobbs
+/* Copyright (c) 2012-2014 Clayton G. Hobbs
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
@@ -21,6 +21,7 @@
  */
 
 #include "level.h"
+#include "actor.h"
 
 
 struct level *alloc_level(int y, int x)
